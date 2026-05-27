@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Farmano
 {
-    public partial class Form1 : Form
+    public partial class RegistroForm : Form
     {
-        public Form1()
+        public RegistroForm()
         {
             InitializeComponent();
         }
