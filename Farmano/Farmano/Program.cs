@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Farmano.Presenters;
+using Farmano.Views;
+using System;
 using System.Windows.Forms;
 
 namespace Farmano
 {
     internal static class Program
     {
-        /// <summary>
-        /// Punto de entrada principal para la aplicación.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
+
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+
+            LoginForm view =
+            new LoginForm();
+
+            LoginPresenter presenter =
+            new LoginPresenter(view);
+
+            Application.Run(view);
         }
     }
 }
