@@ -16,5 +16,10 @@ namespace Farmano.Views
         {
             InitializeComponent();
         }
+
+        private void ProveedorForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -100,6 +100,7 @@
     <Compile Include="Interfaces\IClienteView.cs" />
     <Compile Include="Interfaces\ILoginView.cs" />
     <Compile Include="Interfaces\IProductoView.cs" />
+    <Compile Include="Interfaces\IProveedorView.cs" />
     <Compile Include="Interfaces\IRegistroView.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Medicamento.cs" />
@@ -108,10 +109,12 @@
     <Compile Include="Presenters\ClientePresenter.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Presenters\ProductoPresenter.cs" />
+    <Compile Include="Presenters\ProveedorPresenter.cs" />
     <Compile Include="Presenters\RegistroPresenter.cs" />
     <Compile Include="Repositories\ClienteRepository.cs" />
     <Compile Include="Repositories\ConexionBD.cs" />
     <Compile Include="Repositories\MedicamentoRepository.cs" />
+    <Compile Include="Repositories\ProveedorRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="Views\DashboardForm.cs">
       <SubType>Form</SubType>

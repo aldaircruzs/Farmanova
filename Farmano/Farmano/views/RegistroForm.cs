@@ -11,7 +11,7 @@ namespace Farmano.Views
         {
             InitializeComponent();
 
-            btnGuardar.Click += delegate
+            btnRegistrar.Click += delegate
             {
                 GuardarEvent?.Invoke(
                     this,
@@ -51,5 +51,18 @@ namespace Farmano.Views
         }
 
         public event EventHandler GuardarEvent;
+
+
+        private void RegistroForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+      
     }
 }

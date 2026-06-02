@@ -38,7 +38,7 @@ namespace Farmano.Presenters
             {
                 MessageBox.Show("Usuario registrado correctamente");
 
-                LimpiarCampos();
+                ((Form)view).Close();
             }
             else
             {
@@ -46,9 +46,6 @@ namespace Farmano.Presenters
             }
         }
 
-        private void LimpiarCampos()
-        {
-            MessageBox.Show("Registro listo para nuevo usuario");
-        }
+        
     }
 }

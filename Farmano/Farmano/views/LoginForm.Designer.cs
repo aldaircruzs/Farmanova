@@ -31,6 +31,7 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnRegistro = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -79,16 +80,17 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(30, 160);
+            this.btnLogin.Location = new System.Drawing.Point(100, 152);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(90, 30);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Ingresar";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnRegistro
             // 
-            this.btnRegistro.Location = new System.Drawing.Point(140, 160);
+            this.btnRegistro.Location = new System.Drawing.Point(100, 225);
             this.btnRegistro.Name = "btnRegistro";
             this.btnRegistro.Size = new System.Drawing.Size(90, 30);
             this.btnRegistro.TabIndex = 6;
@@ -96,11 +98,21 @@
             this.btnRegistro.UseVisualStyleBackColor = true;
             this.btnRegistro.Click += new System.EventHandler(this.btnRegistro_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(97, 199);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "¿No tienes cuenta?";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 230);
+            this.ClientSize = new System.Drawing.Size(322, 267);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.txtUsuario);
@@ -126,5 +138,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnRegistro;
+        private System.Windows.Forms.Label label2;
     }
 }

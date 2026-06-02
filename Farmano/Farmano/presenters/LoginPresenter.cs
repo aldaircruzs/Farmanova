@@ -31,8 +31,6 @@ namespace Farmano.Presenters
 
             if (usuario != null)
             {
-                MessageBox.Show(
-                    "Bienvenido " + usuario.Nombre);
 
                 DashboardForm dashboard =
                     new DashboardForm();

@@ -31,6 +31,7 @@ namespace Farmano.Views
         private void InitializeComponent()
         {
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnProveedor = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -58,6 +59,7 @@ namespace Farmano.Views
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.Teal;
+            this.panelMenu.Controls.Add(this.btnProveedor);
             this.panelMenu.Controls.Add(this.pictureBox1);
             this.panelMenu.Controls.Add(this.btnCerrarSesion);
             this.panelMenu.Controls.Add(this.label2);
@@ -71,6 +73,21 @@ namespace Farmano.Views
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(149, 711);
             this.panelMenu.TabIndex = 0;
+            // 
+            // btnProveedor
+            // 
+            this.btnProveedor.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnProveedor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProveedor.FlatAppearance.BorderSize = 0;
+            this.btnProveedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProveedor.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProveedor.ForeColor = System.Drawing.Color.White;
+            this.btnProveedor.Location = new System.Drawing.Point(19, 348);
+            this.btnProveedor.Name = "btnProveedor";
+            this.btnProveedor.Size = new System.Drawing.Size(94, 32);
+            this.btnProveedor.TabIndex = 7;
+            this.btnProveedor.Text = "Proveedor";
+            this.btnProveedor.UseVisualStyleBackColor = false;
             // 
             // pictureBox1
             // 
@@ -90,7 +107,7 @@ namespace Farmano.Views
             this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(8, 370);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(4, 402);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(117, 40);
             this.btnCerrarSesion.TabIndex = 5;
@@ -283,6 +300,7 @@ namespace Farmano.Views
             this.cardVentas.ResumeLayout(false);
             this.cardVentas.PerformLayout();
             this.ResumeLayout(false);
+
                 }
         
 
@@ -308,5 +326,6 @@ namespace Farmano.Views
         private System.Windows.Forms.Panel cardUsuarios;
         private System.Windows.Forms.Panel cardVentas;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnProveedor;
     }
 }
