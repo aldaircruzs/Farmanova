@@ -18,9 +18,10 @@ namespace Farmano.Presenters
             repo = new ProveedorRepository();
 
             this.view.GuardarEvent += GuardarProveedor;
-            this.view.EditarEvent += EditarProveedor;
             this.view.EliminarEvent += EliminarProveedor;
             this.view.BuscarEvent += BuscarProveedor;
+            this.view.NuevoEvent += NuevoProveedor;
+
 
             CargarProveedores();
         }
@@ -32,36 +33,8 @@ namespace Farmano.Presenters
         }
 
         private void GuardarProveedor(
-            object sender,
-            EventArgs e)
-        {
-            Proveedor p = new Proveedor()
-            {
-                Nombre = view.Nombre,
-                Direccion = view.Direccion,
-                NumeroTelefono = view.NumeroTelefono,
-                NumeroCertificacion = view.NumeroCertificacion,
-                CP = view.CP,
-                RFC = view.RFC
-            };
-
-            if (repo.Guardar(p))
-            {
-                MessageBox.Show(
-                    "Proveedor guardado correctamente");
-
-                CargarProveedores();
-            }
-            else
-            {
-                MessageBox.Show(
-                    "Error al guardar proveedor");
-            }
-        }
-
-        private void EditarProveedor(
-            object sender,
-            EventArgs e)
+        object sender,
+        EventArgs e)
         {
             Proveedor p = new Proveedor()
             {
@@ -74,14 +47,37 @@ namespace Farmano.Presenters
                 RFC = view.RFC
             };
 
-            if (repo.Actualizar(p))
-            {
-                MessageBox.Show(
-                    "Proveedor actualizado");
+            bool resultado;
 
+            if (view.IdProveedor == 0)
+            {
+                resultado = repo.Guardar(p);
+
+                if (resultado)
+                {
+                    MessageBox.Show(
+                        "Proveedor registrado correctamente");
+                }
+            }
+            else
+            {
+                resultado = repo.Actualizar(p);
+
+                if (resultado)
+                {
+                    MessageBox.Show(
+                        "Proveedor actualizado correctamente");
+                }
+            }
+
+            if (resultado)
+            {
                 CargarProveedores();
+                view.LimpiarCampos();
             }
         }
+
+        
 
         private void EliminarProveedor(
             object sender,
@@ -112,6 +108,12 @@ namespace Farmano.Presenters
         {
             view.ProveedoresLista.DataSource =
                 repo.Buscar(view.BuscarTexto);
+        }
+
+        // Añadido: manejador para el evento NuevoEvent
+        private void NuevoProveedor(object sender,EventArgs e)
+        {
+            view.LimpiarCampos();
         }
     }
 }

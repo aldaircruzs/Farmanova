@@ -1,7 +1,6 @@
 ﻿using Farmano.Interfaces;
 using Farmano.Models;
 using Farmano.Repositories;
-using Farmano.Views;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -12,7 +11,7 @@ namespace Farmano.Presenters
     {
         private IProductoView view;
         private MedicamentoRepository repo;
-        private ProductoForm frm;
+        private bool hayStockBajo;
 
         public ProductoPresenter(IProductoView view)
         {
@@ -25,16 +24,26 @@ namespace Farmano.Presenters
 
             this.view.BuscarEvent += BuscarProducto;
 
-            this.view.EditarEvent += EditarProducto;
-
             this.view.EliminarEvent += EliminarProducto;
 
             this.view.EntradaEvent += EntradaInventario;
 
             this.view.SalidaEvent += SalidaInventario;
+            this.view.NuevoEvent += NuevoProducto;
+
         }
         private void SalidaInventario(object sender,EventArgs e)
         {
+            if (!ValidarSeleccion())
+            {
+                return;
+            }
+
+            if (!ValidarCantidad())
+            {
+                return;
+            }
+
             if (repo.SalidaStock(
                 view.IdMedicamento,
                 view.Cantidad))
@@ -52,6 +61,16 @@ namespace Farmano.Presenters
         }
         private void EntradaInventario(object sender,EventArgs e)
         {
+            if (!ValidarSeleccion())
+            {
+                return;
+            }
+
+            if (!ValidarCantidad())
+            {
+                return;
+            }
+
             if (repo.EntradaStock(
                 view.IdMedicamento,
                 view.Cantidad))
@@ -61,10 +80,20 @@ namespace Farmano.Presenters
 
                 CargarMedicamentos();
             }
+            else
+            {
+                MessageBox.Show(
+                    "No se pudo actualizar el stock");
+            }
         }
 
         private void EliminarProducto(object sender,EventArgs e)
         {
+            if (!ValidarSeleccion())
+            {
+                return;
+            }
+
             DialogResult respuesta =
                 MessageBox.Show(
                     "¿Desea eliminar este medicamento?",
@@ -104,10 +133,9 @@ namespace Farmano.Presenters
 
         private void GuardarProducto(object sender, EventArgs e)
         {
-            MessageBox.Show("Entró al Presenter");
-
             Medicamento m = new Medicamento()
             {
+                IdMedicamento = view.IdMedicamento,
                 Codigo = view.Codigo,
                 Nombre = view.Nombre,
                 NumeroFabricacion = view.NumeroFabricacion,
@@ -116,54 +144,37 @@ namespace Farmano.Presenters
                 Precio = view.Precio
             };
 
-            if (repo.Guardar(m))
-            {
-                MessageBox.Show("Medicamento guardado correctamente");
+            bool resultado;
 
-                CargarMedicamentos();
+            if (view.IdMedicamento == 0)
+            {
+                resultado = repo.Guardar(m);
+
+                if (resultado)
+                {
+                    MessageBox.Show(
+                        "Medicamento registrado correctamente");
+                }
             }
             else
             {
-                MessageBox.Show("Error al guardar");
-            }
-        }
+                resultado = repo.Actualizar(m);
 
-
-
-        private void EditarProducto(object sender, EventArgs e)
-        {
-            Medicamento m =
-                new Medicamento()
+                if (resultado)
                 {
-                    IdMedicamento =
-                        view.IdMedicamento,
+                    MessageBox.Show(
+                        "Medicamento actualizado correctamente");
+                }
+            }
 
-                    Codigo =
-                        view.Codigo,
-
-                    Nombre =
-                        view.Nombre,
-
-                    NumeroFabricacion =
-                        view.NumeroFabricacion,
-
-                    Presentacion =
-                        view.Presentacion,
-
-                        Stock = view.Stock,
-                    Precio = view.Precio
-                };
-
-            if (repo.Actualizar(m))
+            if (resultado)
             {
-                MessageBox.Show(
-                    "Medicamento actualizado");
+                CargarMedicamentos();
             }
         }
-
-        private void VerificarStockBajo()
+           private void VerificarStockBajo()
         {
-            bool hayStockBajo = false;
+            hayStockBajo = false;
 
             foreach (DataGridViewRow fila in view.ProductosLista.Rows)
             {
@@ -183,6 +194,22 @@ namespace Farmano.Presenters
 
                         hayStockBajo = true;
                     }
+                    else if (stock < 30)
+                    {
+                        fila.DefaultCellStyle.BackColor =
+                            Color.Khaki;
+
+                        fila.DefaultCellStyle.ForeColor =
+                            Color.Black;
+                    }
+                    else
+                    {
+                        fila.DefaultCellStyle.BackColor =
+                            Color.LightGreen;
+
+                        fila.DefaultCellStyle.ForeColor =
+                            Color.Black;
+                    }
                 }
             }
 
@@ -195,5 +222,30 @@ namespace Farmano.Presenters
                     MessageBoxIcon.Warning);
             }
         } 
+        private bool ValidarSeleccion()
+        {
+            // Asume que IdMedicamento es 0 cuando no hay selección
+            if (view.IdMedicamento <= 0)
+            {
+                MessageBox.Show("Seleccione un medicamento.");
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidarCantidad()
+        {
+            // Asume que Cantidad es un valor numérico (int/decimal) proporcionado por la vista
+            if (view.Cantidad <= 0)
+            {
+                MessageBox.Show("Ingrese una cantidad válida (mayor que 0).");
+                return false;
+            }
+            return true;
+        }
+        private void NuevoProducto( object sender,EventArgs e)
+        {
+            view.LimpiarCampos();
+        }
     }
 }

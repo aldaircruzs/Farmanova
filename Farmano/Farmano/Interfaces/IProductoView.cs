@@ -34,5 +34,8 @@ namespace Farmano.Interfaces
         event EventHandler EliminarEvent;
         event EventHandler EntradaEvent;
         event EventHandler SalidaEvent;
+        event EventHandler NuevoEvent;
+
+        void LimpiarCampos();
     }
 }

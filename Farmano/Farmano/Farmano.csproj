@@ -98,21 +98,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IClienteView.cs" />
+    <Compile Include="Interfaces\IInventarioView.cs" />
     <Compile Include="Interfaces\ILoginView.cs" />
     <Compile Include="Interfaces\IProductoView.cs" />
     <Compile Include="Interfaces\IProveedorView.cs" />
     <Compile Include="Interfaces\IRegistroView.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Medicamento.cs" />
+    <Compile Include="Models\MovimientoInventario.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Presenters\ClientePresenter.cs" />
+    <Compile Include="Presenters\InventarioPresenter.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Presenters\ProductoPresenter.cs" />
     <Compile Include="Presenters\ProveedorPresenter.cs" />
     <Compile Include="Presenters\RegistroPresenter.cs" />
     <Compile Include="Repositories\ClienteRepository.cs" />
     <Compile Include="Repositories\ConexionBD.cs" />
+    <Compile Include="Repositories\InventarioRepository.cs" />
     <Compile Include="Repositories\MedicamentoRepository.cs" />
     <Compile Include="Repositories\ProveedorRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
@@ -127,6 +131,12 @@
     </Compile>
     <Compile Include="Views\ClienteForm.Designer.cs">
       <DependentUpon>ClienteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InventarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\InventarioForm.Designer.cs">
+      <DependentUpon>InventarioForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginForm.cs">
       <SubType>Form</SubType>
@@ -154,11 +164,17 @@
     <Compile Include="Views\RegistroForm.Designer.cs">
       <DependentUpon>RegistroForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UsuariosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="Views\ClienteForm.resx">
       <DependentUpon>ClienteForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DashboardForm.resx">
       <DependentUpon>DashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\InventarioForm.resx">
+      <DependentUpon>InventarioForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

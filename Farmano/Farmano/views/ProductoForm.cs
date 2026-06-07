@@ -21,43 +21,12 @@ namespace Farmano.Views
         public ProductoForm()
         {
             InitializeComponent();
+
+            MessageBox.Show("Formulario creado");
+
             btnGuardar.Click += delegate
             {
                 GuardarEvent?.Invoke(
-                    this,
-                    EventArgs.Empty);
-            };
-
-            btnBuscar.Click += delegate
-            {
-                BuscarEvent?.Invoke(
-                    this,
-                    EventArgs.Empty);
-            };
-
-            btnEditar.Click += delegate
-            {
-                EditarEvent?.Invoke(
-                    this,
-                    EventArgs.Empty);
-            };
-            btnEliminar.Click += delegate
-            {
-                EliminarEvent?.Invoke(
-                    this,
-                    EventArgs.Empty);
-            };
-
-            btnEntrada.Click += delegate
-            {
-                EntradaEvent?.Invoke(
-                    this,
-                    EventArgs.Empty);
-            };
-
-            btnSalida.Click += delegate
-            {
-                SalidaEvent?.Invoke(
                     this,
                     EventArgs.Empty);
             };
@@ -72,7 +41,7 @@ namespace Farmano.Views
 
 
 
-        private void dgvProductos_CellClick(object sender,DataGridViewCellEventArgs e)
+        private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
@@ -103,14 +72,26 @@ namespace Farmano.Views
 
         private void ProductoForm_Load(object sender, EventArgs e)
         {
+            dgvProductos.AutoSizeColumnsMode =
+        DataGridViewAutoSizeColumnsMode.Fill;
 
+            dgvProductos.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+
+            dgvProductos.MultiSelect = false;
+
+            dgvProductos.ReadOnly = true;
+
+            dgvProductos.RowHeadersVisible = false;
+
+            dgvProductos.AllowUserToAddRows = false;
         }
         public DataGridView ProductosLista
         {
             get { return dgvProductos; }
         }
 
-        
+
         private int idMedicamento;
 
         public int IdMedicamento
@@ -150,11 +131,9 @@ namespace Farmano.Views
             get { return txtPrecio.Text; }
         }
 
-        public event EventHandler EditarEvent;
         public event EventHandler ProductosEvent;
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Botón Guardar presionado");
         }
 
         private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -171,10 +150,8 @@ namespace Farmano.Views
         {
             get
             {
-                MessageBox.Show("Texto Stock = " + txtStock.Text);
                 int stock;
-                int.TryParse(txtStock.Text, out stock);
-                return stock;
+                return int.TryParse(txtStock.Text, out stock) ? stock : -1;
             }
         }
 
@@ -183,8 +160,7 @@ namespace Farmano.Views
             get
             {
                 decimal precio;
-                decimal.TryParse(txtPrecio.Text, out precio);
-                return precio;
+                return decimal.TryParse(txtPrecio.Text, out precio) ? precio : -1;
             }
         }
 
@@ -198,13 +174,52 @@ namespace Farmano.Views
             get
             {
                 int cantidad;
-                int.TryParse(txtCantidad.Text, out cantidad);
-                return cantidad;
+                return int.TryParse(txtCantidad.Text, out cantidad) ? cantidad : 0;
             }
         }
 
         public event EventHandler EntradaEvent;
 
         public event EventHandler SalidaEvent;
+        public event EventHandler EditarEvent;
+
+        event EventHandler IProductoView.EditarEvent
+        {
+            add { EditarEvent += value; }
+            remove { EditarEvent -= value; }
+        }
+
+        public event EventHandler NuevoEvent;
+        private void LimpiarCampos()
+        {
+            txtCodigo.Clear();
+            txtNombre.Clear();
+            txtFabricacion.Clear();
+            txtPresentacion.Clear();
+            txtStock.Clear();
+            txtPrecio.Clear();
+            txtCantidad.Clear();
+
+            IdMedicamento = 0;
+
+            txtCodigo.Focus();
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            BuscarEvent?.Invoke(
+       this,
+       EventArgs.Empty);
+        }
+
+        void IProductoView.LimpiarCampos()
+        {
+            LimpiarCampos();
+        }
     }
 }

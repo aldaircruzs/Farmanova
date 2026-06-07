@@ -19,7 +19,7 @@ namespace Farmano.Repositories
                 cn.Open();
 
                 string sql =
-                @"INSERT INTO proveedor
+                @"INSERT INTO proovedor
                 (
                     nombre,
                     direccion,
@@ -66,7 +66,7 @@ namespace Farmano.Repositories
 
                 string sql =
                 @"SELECT *
-                  FROM proveedor
+                  FROM proovedor
                   ORDER BY id_proveedor";
 
                 NpgsqlCommand cmd =
